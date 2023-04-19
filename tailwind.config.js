@@ -15,10 +15,6 @@ module.exports = {
       small: "768px",
       laptop: "1390px",
     },
-    fontFamily: {
-      poppins: ["Poppins", "sans-serif"],
-      opensans: ["Open Sans", "sans-serif"],
-    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

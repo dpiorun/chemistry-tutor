@@ -3,6 +3,12 @@ import type { AppProps } from "next/app";
 import AppHead from "../components/AppHead";
 import { AnimatePresence } from "framer-motion";
 import Preloader from "@/components/Preloader";
+import { Poppins } from "@next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin-ext"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -10,7 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <AppHead />
       <Preloader />
       <AnimatePresence mode="wait" initial={false}>
-        <Component {...pageProps} />
+        <div className={poppins.className}>
+          <Component {...pageProps} />
+        </div>
       </AnimatePresence>
     </>
   );

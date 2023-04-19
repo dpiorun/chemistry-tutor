@@ -11,7 +11,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
   return (
     <Fragment>
-      <div className="relative float-left clear-both min-h-[100vh] w-full font-poppins">
+      <div className="relative float-left clear-both min-h-[100vh] w-full">
         <div className="fixed inset-y-0 left-0 z-[10] hidden w-[70px] bg-white middle:block" />
         <div className="fixed inset-y-0 right-0 z-[10] hidden w-[70px] bg-white middle:block" />
 
