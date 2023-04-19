@@ -25,6 +25,28 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      keyframes: {
+        lineheight: {
+          "0%": {
+            height: "0%",
+          },
+          "100%": {
+            height: "100%",
+          },
+        },
+        lineround: {
+          "0%": {
+            transform: "translateY(-100%)",
+          },
+          "100%": {
+            transform: "translateY(200%)",
+          },
+        },
+      },
+      animation: {
+        lineheight: "lineheight 1000ms ease-in-out 0s forwards",
+        lineround: "lineround 1200ms linear 2000s infinite",
+      },
     },
   },
   plugins: [],
