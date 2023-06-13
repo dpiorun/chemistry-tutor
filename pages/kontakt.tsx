@@ -2,7 +2,7 @@ import SectionTitle from "@/components/SectionTitle";
 import Layout from "@/components/layout/Layout";
 
 const Contact = () => (
-  <Layout>
+  <Layout img="assets/img/about/about_3.jpg">
     <section>
       <SectionTitle>Kontakt</SectionTitle>
       <p>Strona w budowie...</p>

@@ -3,7 +3,7 @@ import Layout from "@/components/layout/Layout";
 import { InlineWidget } from "react-calendly";
 
 const Lessons = () => (
-  <Layout>
+  <Layout img="assets/img/about/about_4.jpg">
     <section>
       <SectionTitle>Korepetycje</SectionTitle>
       <InlineWidget

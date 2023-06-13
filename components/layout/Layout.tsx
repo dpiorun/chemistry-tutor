@@ -6,9 +6,10 @@ import Header from "./Header";
 
 interface Props {
   children: ReactNode;
+  img: string;
 }
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children, img }: Props) => {
   return (
     <Fragment>
       <div className="relative float-left clear-both min-h-[100vh] w-full">
@@ -21,7 +22,7 @@ const Layout = ({ children }: Props) => {
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: "url(assets/img/about/1.jpg)",
+                backgroundImage: `url(${img})`,
               }}
             />
           </div>

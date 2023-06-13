@@ -64,11 +64,11 @@ const Header = () => {
         <div className="px-6 pb-6 pt-20 text-right">
           <div>
             <Image
-              className="float-right h-[70px] w-[70px] object-cover"
+              className="float-right h-[100px] w-[100px] object-cover"
               alt="image"
-              src={"/assets/img/about/1.jpg"}
-              width={70}
-              height={70}
+              src={"/assets/img/about/about_3.jpg"}
+              width={100}
+              height={100}
             />
             <div className="float-right mt-20 h-auto w-full">
               <ul>

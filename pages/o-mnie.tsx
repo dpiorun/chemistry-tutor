@@ -3,6 +3,7 @@ import ListTriangle from "@/components/ListTriangle";
 import ListYears from "@/components/ListYears";
 import SectionTitle from "@/components/SectionTitle";
 import Layout from "@/components/layout/Layout";
+import Image from "next/image";
 
 enum SectionTitles {
   About = "O mnie",
@@ -86,24 +87,34 @@ const testimonials = [
 
 const About = () => {
   return (
-    <Layout>
+    <Layout img="assets/img/about/about_1.jpg">
       <SectionAbout cols={1}>
         <SectionTitle>{SectionTitles.About}</SectionTitle>
-        <div className="grid gap-x-12 gap-y-12 small:grid-cols-2 middle:grid-cols-none laptop:small:grid-cols-2">
-          <div>
-            <AboutMeParagraph />
+        <div className="grid gap-12 small:grid-cols-2 small:grid-cols-2 middle:grid-cols-none">
+          <div className="relative aspect-square w-full middle:hidden">
+            <Image
+              src="/assets/img/about/about_1.jpg"
+              alt=" "
+              fill
+              className="position-top object-cover"
+            />
           </div>
-          <ul>
-            {aboutData.map((entry) => (
-              <li
-                key={entry[0]}
-                className="mb-3 grid grid-cols-[minmax(140px,auto)_minmax(0,1fr)]"
-              >
-                <span className="font-bold">{entry[0]}</span>
-                <span>{entry[1]}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="grid gap-12 laptop:grid-cols-2">
+            <div>
+              <AboutMeParagraph />
+            </div>
+            <ul>
+              {aboutData.map((entry) => (
+                <li
+                  key={entry[0]}
+                  className="mb-3 grid grid-cols-[minmax(140px,auto)_minmax(0,1fr)]"
+                >
+                  <span className="font-bold">{entry[0]}</span>
+                  <span>{entry[1]}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </SectionAbout>
       <SectionAbout cols={2}>
