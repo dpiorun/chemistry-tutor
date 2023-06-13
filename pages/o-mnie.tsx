@@ -4,6 +4,8 @@ import ListYears from "@/components/ListYears";
 import SectionTitle from "@/components/SectionTitle";
 import Layout from "@/components/layout/Layout";
 import Image from "next/image";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { JSDOM } from "jsdom";
 
 enum SectionTitles {
   About = "O mnie",
@@ -67,25 +69,45 @@ const experienceData = [
   },
 ];
 
-const testimonials = [
-  {
-    desc: "Bardzo polecam, miła atmosfera na zajęciach. Pani Kornelia podchodziła indywidualnie do omawianych zagadnień i poświęcała na nie taką ilość czasu, jaka była dla mnie konieczna. Zadania i zagadnienia były dokładnie analizowane, a ponadto dostawałam niezliczoną ilość kserówek z zadaniami i arkuszami, które są przerabiane na zajęciach i jako praca domowa. Pani Kornelia była dla mnie ogromną motywacją w nauce do matury i wiem, że bez niej nie osiągnęłabym mojego wyniku. :)))",
-    img: "img/testimonials/1.jpg",
-    user: "Maja",
-  },
-  {
-    desc: "Bardzo polecam zajęcia u Pani Korneli. Miła atmosfera na zajęciach i indywidualne podejście do ucznia pomogło w zrozumienie i opanowaniu materiału do matury z chemii. Pani Kornelia była bardzo pomocna i motywowała do nauki. Dodatkowo nie było żadnych problemów z komunikacją.      ",
-    img: "img/testimonials/2.jpg",
-    user: "Weronika",
-  },
-  {
-    desc: "Z całego serca polecam! Dzięki Pani Kornelii udało mi się naprawdę polubić chemię. Ciekawie prowadzone zajęcia to ogromny plus! Bardzo lubiłam uczęszczać na korepetycje i nigdy się nie nudziłam, atmosfera na lekcjach bardzo sprzyjała nauce :) Bardzo ważne jest też to, że dostawałam masę kserówek do domu i też do robienia na zajęciach (z tego co słyszałam moi znajomi u innych korepetytorów musieli sami wszystko przepisywać). Zdałam ten przedmiot na maturze z satysfakcjonującym mnie wynikiem i to wszystko dzięki Pani Kornelii Piorun!! :)      ",
-    img: "img/testimonials/3.jpg",
-    user: "Magda",
-  },
-];
+type Testimonial = {
+  avatar?: string | null;
+  author?: string | null;
+  rate?: string | null;
+  date?: string | null;
+  content?: string | null;
+};
 
-const About = () => {
+export const getStaticProps: GetStaticProps<{
+  testimonials: Testimonial[];
+}> = async () => {
+  const response = await fetch("https://www.e-korepetycje.net/korciao/chemia");
+  const html = await response.text();
+
+  const dom = new JSDOM(html);
+  const document = dom.window.document;
+
+  const testimonials: Testimonial[] = [];
+
+  const opinions = document.querySelectorAll(".opinion-single");
+
+  opinions.forEach((opinion) => {
+    const rate = opinion.querySelector(".rate")?.textContent;
+    if (rate?.trim() == "5/5")
+      testimonials.push({
+        avatar: opinion.querySelector('img[alt="avatar"]')?.getAttribute("src"),
+        author: opinion.querySelector(".opinion-author")?.textContent,
+        rate,
+        date: opinion.querySelector(".opinion-date")?.textContent,
+        content: opinion.querySelector(".opinion-content-wrapper")?.textContent,
+      });
+  });
+
+  return { props: { testimonials } };
+};
+
+const About = ({
+  testimonials,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout img="assets/img/about/about_1.jpg">
       <SectionAbout cols={1}>
@@ -167,21 +189,50 @@ const About = () => {
         </div>
       </SectionAbout>
 
-      <SectionAbout cols={1}>
-        <SectionTitle>{SectionTitles.Testimonials}</SectionTitle>
-        <div className="mt-20 grid gap-x-12 gap-y-16 small:grid-cols-2 middle:grid-cols-none laptop:small:grid-cols-2 large:grid-cols-3">
-          {testimonials.map((testimonial, index) => (
-            <div key={index}>
-              <div className="border-2 border-solid border-slate-200 p-10">
-                <p>{testimonial.desc}</p>
+      {testimonials.length > 0 && (
+        <SectionAbout cols={1}>
+          <SectionTitle>{SectionTitles.Testimonials}</SectionTitle>
+          <div className="mt-20 grid gap-x-12 gap-y-16 small:grid-cols-2 middle:grid-cols-none laptop:small:grid-cols-2 large:grid-cols-3">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="flex flex-col">
+                <div className="grow border-2 border-solid border-slate-200 p-10">
+                  <div className="flex justify-between">
+                    <div className="flex items-center">
+                      {Array.from(Array(5).keys()).map((index) => (
+                        <Image
+                          alt="star"
+                          src="/assets/img/svg/star.svg"
+                          width={18}
+                          height={18}
+                          className="img-amber-600"
+                          key={index}
+                        />
+                      ))}
+                      <p className="ms-2 text-sm">{testimonial.rate}</p>
+                    </div>
+                    <p className="text-xs">{testimonial.date}</p>
+                  </div>
+                  <p className="mt-4">{testimonial.content}</p>
+                </div>
+                <div className="ms-4 mt-6 flex items-center">
+                  {testimonial.avatar && (
+                    <img
+                      src={testimonial.avatar}
+                      width={60}
+                      height={60}
+                      alt="avatar"
+                    />
+                  )}
+
+                  <h3 className="text-l float-right px-10 font-semibold">
+                    {testimonial.author}
+                  </h3>
+                </div>
               </div>
-              <h3 className="text-l float-right px-10 font-semibold">
-                {testimonial.user}
-              </h3>
-            </div>
-          ))}
-        </div>
-      </SectionAbout>
+            ))}
+          </div>
+        </SectionAbout>
+      )}
     </Layout>
   );
 };
