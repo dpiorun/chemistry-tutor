@@ -7,7 +7,7 @@ const Lessons = () => (
     <section>
       <SectionTitle>Korepetycje</SectionTitle>
       <InlineWidget
-        url="https://calendly.com/satisfied-mathematics/60min"
+        url="https://calendly.com/kornelia-piorun/60min"
         styles={{
           height: "75vh",
         }}
