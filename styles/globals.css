@@ -7,3 +7,20 @@
   filter: invert(53%) sepia(19%) saturate(5523%) hue-rotate(6deg)
     brightness(92%) contrast(95%);
 }
+
+span.unicorn {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+span.unicorn.hej:before {
+  content: "moc.lia";
+}
+span.unicorn.hej:after {
+  content: "@nuroip.ailenrok :liame";
+}
+span.unicorn.ho:before {
+  content: "760 173 ";
+}
+span.unicorn.ho:after {
+  content: " 84+ :let";
+}

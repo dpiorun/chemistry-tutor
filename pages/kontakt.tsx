@@ -5,7 +5,9 @@ const Contact = () => (
   <Layout img="assets/img/about/about_3.jpg">
     <section>
       <SectionTitle>Kontakt</SectionTitle>
-      <p>Strona w budowie...</p>
+      <p>
+        <span className="unicorn hej">mg</span>
+      </p>
     </section>
   </Layout>
 );
