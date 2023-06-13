@@ -23,7 +23,7 @@ const AboutMeParagraph = () => (
       ogromną przyjemność! Obecnie pracuję jako nauczyciel chemii w liceum.
     </p>
     <p>
-      Z moim 15 letnim doświadczeniem w nauczaniu chemii oraz przygotowaniem
+      Z moim 15 letnim doświadczeniem w nauczaniu chemii oraz wykształceniem
       pedagogicznym przygotowuję do matury i zarażam pasją do chemii.
     </p>
   </>
